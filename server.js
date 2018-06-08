@@ -1,21 +1,15 @@
-import Home from './Home';
+import ReactBRServer from 'react-br-server';
 
-const
+import compression from 'compression';
 
-	port = 3000,
+const application = ReactBRServer.application();
 
-	charset = 'UTF-8',
+application
 
-	http = require('http');
+	.port(4000)
 
-http.createServer((request, response) => {
+	.charset('UTF-8')
 
-	response.writeHead(200, {
-		'Content-Type': 'text/html'
-	});
+	.use(compression())
 
-	response.end(request.url, charset);
-
-}).listen(port);
-
-console.log(`Server running at http://localhost:${port}`);
+	.listen(() => console.log(`Listening on port ${application.port()}.`));

@@ -4,32 +4,57 @@ const
 
 	pluginProposalObjectRestSpread = require('@babel/plugin-proposal-object-rest-spread'),
 
-	path = require('path');
+	/** Babel config */
+
+	babelLoaderConfig = {
+		test: /\.jsx?$/,
+		exclude: /node_modules/,
+		loader: 'babel-loader',
+		options: {
+			presets: [
+				'@babel/preset-env',
+				'@babel/preset-react'
+			],
+			plugins: [
+				pluginProposalObjectRestSpread
+			]
+		}
+	};
 
 module.exports = [
 	{
-		target: 'node',
-		entry: path.join(__dirname, 'server.js'),
+		target: 'web',
+		entry: `${__dirname}/client.js`,
 		output: {
-			path: path.join(__dirname, 'distribution'),
-			filename: 'node.bundler.js'
+			path: `${__dirname}/distribution`,
+			filename: 'client.bundler.js'
 		},
 		module: {
 			rules: [
-				{
-					test: /\.jsx?$/,
-					exclude: /node_modules/,
-					loader: 'babel-loader',
-					options: {
-						presets: [
-							'@babel/preset-env',
-							'@babel/preset-react'
-						],
-						plugins: [
-							pluginProposalObjectRestSpread
-						]
-					}
-				}
+				babelLoaderConfig
+			]
+		},
+		resolve: {
+			extensions: [
+				'.js',
+				'.jsx'
+			],
+			alias: {
+				'react-br-client': `${__dirname}/temporary/ReactBRClient`
+			}
+		},
+		devtool: 'source-map'
+	},
+	{
+		target: 'node',
+		entry: `${__dirname}/server.js`,
+		output: {
+			path: `${__dirname}/distribution`,
+			filename: 'server.bundler.js'
+		},
+		module: {
+			rules: [
+				babelLoaderConfig
 			]
 		},
 		externals: [
@@ -39,10 +64,11 @@ module.exports = [
 			extensions: [
 				'.js',
 				'.jsx'
-			]
-		}
-	}/*,
-	{
-		target: 'web'
-	}*/
+			],
+			alias: {
+				'react-br-server': `${__dirname}/temporary/ReactBRServer.js`
+			}
+		},
+		devtool: 'source-map'
+	}
 ];

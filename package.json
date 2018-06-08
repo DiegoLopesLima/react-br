@@ -1,10 +1,10 @@
 {
-  "name": "foo",
-  "version": "1.0.0",
+  "name": "react-br",
+  "version": "1.0.0-alpha",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "webpack --mode=development && node distribution/node.bundler.js"
+    "start": "webpack --mode development && node distribution/server.bundler.js"
   },
   "keywords": [],
   "author": "Diego Lopes Lima",
@@ -20,6 +20,7 @@
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
+    "compression": "^1.7.2",
     "react": "^16.4.0",
     "react-dom": "^16.4.0"
   }
