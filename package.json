@@ -1,0 +1,26 @@
+{
+  "name": "foo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "webpack --mode=development && node distribution/node.bundler.js"
+  },
+  "keywords": [],
+  "author": "Diego Lopes Lima",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.49",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.49",
+    "@babel/preset-env": "^7.0.0-beta.49",
+    "@babel/preset-react": "^7.0.0-beta.49",
+    "babel-loader": "^8.0.0-beta.3",
+    "webpack": "^4.11.1",
+    "webpack-cli": "^3.0.3",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "dependencies": {
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0"
+  }
+}
